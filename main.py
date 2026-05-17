@@ -2,7 +2,7 @@ from src.config import RAW_PATH, OUT_PATH, FIGURES_PATH
 from src.io import load_csv
 from src.cleaning import clean
 from src.features import build_features
-from src.utils import assert_columns, assert_not_empty
+from src.utils import validate_raw_dataset, validate_clean_dataset
 from src.viz import plot_graph
 
 
@@ -12,29 +12,7 @@ def main():
     print(f"Loading data from: {RAW_PATH}")
     df = load_csv(RAW_PATH)
 
-    assert_not_empty(df)
-
-    required_columns = [
-        "Ticket ID",
-        "Customer Name",
-        "Customer Email",
-        "Customer Age",
-        "Customer Gender",
-        "Product Purchased",
-        "Date of Purchase",
-        "Ticket Type",
-        "Ticket Subject",
-        "Ticket Description",
-        "Ticket Status",
-        "Resolution",
-        "Ticket Priority",
-        "Ticket Channel",
-        "First Response Time",
-        "Time to Resolution",
-        "Customer Satisfaction Rating",
-    ]
-
-    assert_columns(df, required_columns)
+    validate_raw_dataset(df)
 
     print("CSV loaded successfully.")
     print(f"Rows: {df.shape[0]}")
@@ -44,6 +22,7 @@ def main():
 
     df = clean(df)
     df = build_features(df)
+    validate_clean_dataset(df)
 
     FIGURES_PATH.mkdir(parents=True, exist_ok=True)
     plot_graph(df)
