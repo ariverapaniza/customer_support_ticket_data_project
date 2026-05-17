@@ -5,4 +5,9 @@ import seaborn as sns
 
 
 def plot_graph(df: pd.DataFrame) -> None:
-    pass
+    """
+    Temporary visualization function for Step 1.
+
+    Real plots will be added later in the project.
+    """
+    print("Visualization step skipped for now.")
