@@ -6,3 +6,4 @@ __pycache__/
 .vscode/
 data/processed/
 notebooks/eda_OLD.ipynb
+reports/eda.html
